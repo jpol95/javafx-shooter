@@ -49,4 +49,5 @@ public abstract class GamePiece {
     public int getFitWidth() {
         return fitWidth;
     }
+    public abstract void defaultMove();
 }

@@ -9,4 +9,8 @@ public class BulletPiece extends GamePiece {
         this.hp = 1;
         this.imageLink = "file:///C:/Users/19548/Downloads/ball.png";
     }
+
+    public void defaultMove(){
+        this.updatePosition(this.getX(), this.getY() - 10);
+    }
 }

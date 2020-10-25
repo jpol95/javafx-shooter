@@ -1,5 +1,6 @@
 package sample;
 
+import Pieces.EnemyPiece;
 import Pieces.GamePiece;
 import Pieces.MyPiece;
 
@@ -9,6 +10,7 @@ public class Model {
     public Model(){
         onScreen = new ArrayList<>();
         onScreen.add(new MyPiece());
+        onScreen.add(new EnemyPiece(0, 20));
     }
     public void add(GamePiece g){
         onScreen.add(g);

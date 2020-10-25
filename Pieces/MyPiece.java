@@ -10,4 +10,9 @@ public class MyPiece extends GamePiece {
         this.imageLink = "file:///C:/Users/19548/Downloads/ball.png";
     }
 
+    @Override
+    public void defaultMove() {
+        return;
+    }
+
 }

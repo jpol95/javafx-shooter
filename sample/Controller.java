@@ -14,6 +14,9 @@ import java.util.*;
 
 
 public final class Controller extends Application{
+
+    public static final int X_SIZE = 500;
+    public static final int Y_SIZE = 500;
     private final Model model;
     private Pane root;
     private final Scene theScene;
@@ -28,10 +31,12 @@ public final class Controller extends Application{
     public void start(Stage stage) throws Exception {
        stage.setTitle("Welcome to my game");
        stage.setScene(theScene);
-       render();
+       GameLoop game = new GameLoop(this);
+       game.handle(System.nanoTime());
        root.setPrefSize(500,500);
        handleMovement(theScene);
        stage.show();
+       game.start();
 
     }
 
@@ -65,25 +70,14 @@ public final class Controller extends Application{
            case SPACE:
                model.add(new BulletPiece(mainChar.getX(), 100));
         }
-        render();
     }
 
-
-    private void render(){
-        ArrayList<ImageView> onScreenChars = new ArrayList<>();
-        for (GamePiece g: model.getOnScreen()){
-            ImageView screenChar = new ImageView(g.getImageLink());
-            screenChar.setX(g.getX());
-    //        System.out.print(g.getX());
-            screenChar.setY(g.getY());
-            screenChar.setFitWidth(g.getFitWidth());
-            screenChar.setFitHeight(g.getFitHeight());
-            onScreenChars.add(screenChar);
-        }
-        root.getChildren().clear();
-        root.getChildren().addAll(onScreenChars);
+    public Model getModel() {
+        return model;
     }
-
+    public Pane getRoot() {
+        return root;
+    }
 
 }
 
