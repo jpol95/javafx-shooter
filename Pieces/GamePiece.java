@@ -1,16 +1,17 @@
 package Pieces;
 
 import com.sun.javafx.geom.Shape;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 
 public abstract class GamePiece {
     private double xPosition;
     private double yPosition;
     protected int hp;
     protected int damage;
-    protected String imageLink;
+    protected Image image;
     private int fitHeight;
     private int fitWidth;
-    public GamePiece(){}
     public GamePiece(double xPosition, double yPosition, int fitWidth, int fitHeight){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
@@ -38,9 +39,10 @@ public abstract class GamePiece {
         return hp;
     }
 
-    public String getImageLink() {
-        return imageLink;
+    public void render(GraphicsContext gc){
+        gc.drawImage(this.image, this.getX(), this.getY());
     }
+
 
     public int getFitHeight() {
         return fitHeight;

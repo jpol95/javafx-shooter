@@ -4,7 +4,9 @@ import Pieces.BulletPiece;
 import Pieces.GamePiece;
 import Pieces.MyPiece;
 import javafx.application.Application;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
@@ -18,12 +20,14 @@ public final class Controller extends Application{
     public static final int X_SIZE = 500;
     public static final int Y_SIZE = 500;
     private final Model model;
-    private Pane root;
+    Canvas canvas;
+    private Group root;
     private final Scene theScene;
 
     public Controller() {
+        canvas = new Canvas(500,500);
         model = new Model();
-        root = new Pane();
+        root = new Group();
         theScene = new Scene(root);
     }
 
@@ -33,7 +37,7 @@ public final class Controller extends Application{
        stage.setScene(theScene);
        GameLoop game = new GameLoop(this);
        game.handle(System.nanoTime());
-       root.setPrefSize(500,500);
+       root.getChildren().add(canvas);
        handleMovement(theScene);
        stage.show();
        game.start();
@@ -68,14 +72,14 @@ public final class Controller extends Application{
                mainChar.updatePosition(currentX, currentY + 10);
                break;
            case SPACE:
-               model.add(new BulletPiece(mainChar.getX(), 100));
+               model.add(new BulletPiece(mainChar.getX(), 400));
         }
     }
 
     public Model getModel() {
         return model;
     }
-    public Pane getRoot() {
+    public Group getRoot() {
         return root;
     }
 

@@ -1,5 +1,7 @@
 package Pieces;
 
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import sample.Controller;
 
 import java.util.ArrayList;
@@ -12,13 +14,18 @@ public class EnemyPiece extends GamePiece {
         super(x, y, 100, 100);
         this.damage = 10;
         this.hp = 1;
-        this.imageLink = "file:/C:/Users/19548/Downloads/enemyship.jpg";
+        this.image = new Image("file:/C:/Users/19548/Downloads/enemyship.jpg");
         this.setPositions();
         index = 0;
     }
 
-    public void defaultMove() {
-        this.updatePosition(positions.get(index%positions.size())[0], positions.get(index%positions.size())[1]);
+    public void render(GraphicsContext gc){
+        gc.drawImage(this.image, this.getX(), this.getY());
+    }
+
+    public void defaultMove(GraphicsContext gc) {
+        this.updatePosition(positions.get(index)[0], positions.get(index)[1]);
+        render(gc);
         index++;
     }
 
