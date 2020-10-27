@@ -1,6 +1,7 @@
 package sample;
 
 import Pieces.BulletPiece;
+import Pieces.EnemyPiece;
 import Pieces.GamePiece;
 import Pieces.MyPiece;
 import javafx.application.Application;
@@ -21,10 +22,13 @@ public final class Controller extends Application{
     private Pane root;
     private final Scene theScene;
 
+    private Set<String> keys;
+
     public Controller() {
         model = new Model();
         root = new Pane();
         theScene = new Scene(root);
+        keys= new HashSet<>();
     }
 
     @Override
@@ -34,6 +38,9 @@ public final class Controller extends Application{
        GameLoop game = new GameLoop(this);
        game.handle(System.nanoTime());
        root.setPrefSize(500,500);
+       for (int i = 0; i < model.getOnScreen().size(); i++) {
+           root.getChildren().add(model.getOnScreen().get(i).getImageview());
+       }
        handleMovement(theScene);
        stage.show();
        game.start();
@@ -44,32 +51,25 @@ public final class Controller extends Application{
     public void handleMovement(Scene scene) {
         scene.setOnKeyPressed(
                 keyEvent -> {
-                    KeyCode direction = keyEvent.getCode();
-                    movePiece(direction);
+                    String direction = keyEvent.getCode().toString();
+                    keys.add(direction);
+                }
+        );
+        scene.setOnKeyReleased(
+                keyEvent -> {
+                    String direction = keyEvent.getCode().toString();
+                    keys.remove(direction);
                 }
         );
     }
 
     private void movePiece(KeyCode direction){
-        MyPiece mainChar = model.getMain();
-       double currentX = mainChar.getX();
-       double currentY = mainChar.getY();
-       switch (direction){
-           case LEFT:
-               mainChar.updatePosition(currentX - 10, currentY);
-               break;
-           case UP:
-               mainChar.updatePosition(currentX, currentY - 10);
-               break;
-           case RIGHT:
-               mainChar.updatePosition(currentX + 10, currentY);
-               break;
-           case DOWN:
-               mainChar.updatePosition(currentX, currentY + 10);
-               break;
-           case SPACE:
-               model.add(new BulletPiece(mainChar.getX(), 100));
-        }
+       MyPiece mainChar = model.getMain();
+
+    }
+
+    public Set<String> getKeys() {
+        return keys;
     }
 
     public Model getModel() {

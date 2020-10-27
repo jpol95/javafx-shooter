@@ -1,7 +1,10 @@
 package Pieces;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import sample.Controller;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class EnemyPiece extends GamePiece {
@@ -12,7 +15,8 @@ public class EnemyPiece extends GamePiece {
         super(x, y, 100, 100);
         this.damage = 10;
         this.hp = 1;
-        this.imageLink = "file:/C:/Users/19548/Downloads/enemyship.jpg";
+        Image image = new Image("file:///C:/Users/19548/Downloads/enemyship.jpg");
+        this.imageview.setImage(image);
         this.setPositions();
         index = 0;
     }
