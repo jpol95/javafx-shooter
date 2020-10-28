@@ -30,12 +30,13 @@ public abstract class GamePiece {
         configImage();
 
     }
-    public void updatePosition(double x, double y){
-        xPosition = x;
-        yPosition = y;
-        this.imageview.setX(xPosition);
-        this.imageview.setY(yPosition);
-        if (outOfBounds()) this.onScreen = false;
+    public void updatePosition(double x, double y) {
+        if (!outOfBounds()) {
+            xPosition = x;
+            yPosition = y;
+            this.imageview.setX(xPosition);
+            this.imageview.setY(yPosition);
+        }
     }
     public double getX(){
         return this.xPosition;

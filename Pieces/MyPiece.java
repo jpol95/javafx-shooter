@@ -19,5 +19,4 @@ public class MyPiece extends GamePiece {
     public void defaultMove() {
         return;
     }
-
 }
