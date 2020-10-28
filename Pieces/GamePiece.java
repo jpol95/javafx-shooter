@@ -31,7 +31,7 @@ public abstract class GamePiece {
 
     }
     public void updatePosition(double x, double y) {
-        if (!outOfBounds()) {
+        if (!this.outOfBounds()) {
             xPosition = x;
             yPosition = y;
             this.imageview.setX(xPosition);
