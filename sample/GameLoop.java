@@ -8,18 +8,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class GameLoop extends AnimationTimer {
-   Controller c;
+   private Controller c;
+   private List<GamePiece> onScreen;
    public GameLoop(Controller c){
        this.c = c;
+       onScreen = c.getModel().getOnScreen();
    }
     @Override
     public void handle(long l) {
-       for (GamePiece g: c.getModel().getOnScreen()) {
-           g.defaultMove();
-       }
-        render();
+        handleDefault();
+        handleMovement();
+        deleteOffScreen();
     }
 
     @Override
@@ -32,13 +35,27 @@ public class GameLoop extends AnimationTimer {
         super.stop();
     }
 
-    private void render(){
-        ArrayList<ImageView> onScreenChars = new ArrayList<>();
-        for (GamePiece g: c.getModel().getOnScreen()){
-            g.defaultMove();
+    private void handleDefault() {
+        for (int i = 0; i < onScreen.size(); i++) {
+            onScreen.get(i).defaultMove();
+            for (int j = i + 1; i < onScreen.size(); i++){
+                if (onScreen.get(i).collisionDetection(onScreen.get(j))){
+                    handleCollisions(onScreen.get(i), onScreen.get(j));
+                }
+            }
         }
-        handleMovement();
     }
+
+    private void deleteOffScreen(){
+       for (GamePiece g: c.getModel().getOnScreen()) {
+           c.getModel().getOnScreen().remove(g);
+           c.getRoot().getChildren().remove(g.getImageview());
+       }
+    }
+    private void handleCollisions(GamePiece g1, GamePiece g2){
+       g1.decreaseHP(g2);
+       g2.decreaseHP(g1);
+       }
 
 private void handleMovement(){
     GamePiece mainChar = c.getModel().getMain();
@@ -62,4 +79,6 @@ private void handleMovement(){
         c.getKeys().remove("SPACE");
     }
 }
+
+
 }

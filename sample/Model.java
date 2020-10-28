@@ -7,10 +7,10 @@ import Pieces.MyPiece;
 import java.util.ArrayList;
 public class Model {
     private ArrayList<GamePiece> onScreen;
-    public Model(){
+    public Model(Controller controller){
         onScreen = new ArrayList<>();
         onScreen.add(new MyPiece());
-        onScreen.add(new EnemyPiece(0, 20));
+        onScreen.add(new EnemyPiece(0, 20, controller));
     }
     public void add(GamePiece g){
         onScreen.add(g);
@@ -22,10 +22,6 @@ public class Model {
 
     public MyPiece getMain(){
         return (MyPiece) onScreen.get(0);
-    }
-    public static void main(String[] args){
-        Model m = new Model();
-        System.out.print(m.getOnScreen().get(0).getX());
     }
 
 

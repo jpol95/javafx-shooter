@@ -25,7 +25,7 @@ public final class Controller extends Application{
     private Set<String> keys;
 
     public Controller() {
-        model = new Model();
+        model = new Model(this);
         root = new Pane();
         theScene = new Scene(root);
         keys= new HashSet<>();
