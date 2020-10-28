@@ -24,6 +24,7 @@ public class EnemyPiece extends GamePiece {
     }
 
     public void defaultMove() {
+        System.out.println(this.isOnScreen());
         this.updatePosition(positions.get(index%positions.size())[0], positions.get(index%positions.size())[1]);
         if (index > 0 && index%50 == 0) shootBullets();
         index++;

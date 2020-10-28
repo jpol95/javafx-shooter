@@ -20,21 +20,20 @@ public class MyPiece extends GamePiece {
     }
 
     private void goLeft(){
-        if (this.getX() < 0)
+        if (!(this.getX() < 0))
         this.updatePosition(this.getX() - 10, this.getY());
     }
     private void goRight(){
-        if (this.getX() > Controller.X_SIZE)
+        if (!(this.getX() > Controller.X_SIZE))
             this.updatePosition(this.getX() + 10, this.getY());
     }
     private void goDown(){
-        if (this.getY() < 0)
+        if (!(this.getY() > Controller.Y_SIZE))
             this.updatePosition(this.getX(), this.getY() + 10);
-
-    }private void goUp(){
-        if (this.getX() > Controller.Y_SIZE)
+    }
+    private void goUp(){
+        if (!(this.getY() < 0))
             this.updatePosition(this.getX(), this.getY() - 10);
-
     }
 
 

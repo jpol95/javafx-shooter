@@ -39,7 +39,7 @@ public class GameLoop extends AnimationTimer {
     private void handleDefault() {
         for (int i = 0; i < onScreen.size(); i++) {
             onScreen.get(i).defaultMove();
-            for (int j = i + 1; i < onScreen.size(); i++){
+            for (int j = i + 1; j < onScreen.size(); j++){
                 if (onScreen.get(i).collisionDetection(onScreen.get(j))){
                     handleCollisions(onScreen.get(i), onScreen.get(j));
                 }
@@ -62,8 +62,6 @@ public class GameLoop extends AnimationTimer {
 
 private void handleMovement(){
     MyPiece mainChar = c.getModel().getMain();
-    double currentX = c.getModel().getMain().getX();
-    double currentY = c.getModel().getMain().getY();
     mainChar.go(c.getKeys());
     if (c.getKeys().contains("SPACE")){
         BulletPiece bullet = new BulletPiece(mainChar.getX() + mainChar.getFitWidth()/2.35, mainChar.getY());
