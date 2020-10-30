@@ -48,10 +48,10 @@ public class GameLoop extends AnimationTimer {
     }
 
     private void deleteOffScreen() {
-        for (GamePiece g : c.getModel().getOnScreen()) {
-            if (!g.isOnScreen()) {
-                c.getModel().getOnScreen().remove(g);
-                c.getRoot().getChildren().remove(g.getImageview());
+        for (int i = 0; i < c.getModel().getOnScreen().size(); i++) {
+            if (!c.getModel().getOnScreen().get(i).isOnScreen()) {
+                c.getRoot().getChildren().remove(c.getModel().getOnScreen().get(i).getImageview());
+                c.getModel().getOnScreen().remove(c.getModel().getOnScreen().get(i));
             }
         }
     }

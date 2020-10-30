@@ -72,12 +72,12 @@ public abstract class GamePiece {
 
 
     public boolean collisionDetection(GamePiece g1){
-        boolean xCollision = false;
-        if (g1.getX() > this.getX()) xCollision = g1.getX() - this.getX() > this.getFitWidth();
-        else xCollision = this.getX() - g1.getX() > g1.getFitWidth();
-        boolean yCollision = false;
-        if (g1.getY() > this.getY()) yCollision = g1.getY() - this.getY() > this.getFitWidth();
-        else xCollision = this.getY() - g1.getY() > g1.getFitWidth();
+        boolean xCollision;
+        if (g1.getX() > this.getX()) xCollision = Math.abs(g1.getX() - this.getX()) < this.getFitWidth();
+        else xCollision = Math.abs(this.getX() - g1.getX()) < g1.getFitWidth();
+        boolean yCollision;
+        if (g1.getY() > this.getY()) yCollision = Math.abs(g1.getY() - this.getY()) < this.getFitHeight();
+        else yCollision = Math.abs(this.getY() - g1.getY()) < g1.getFitHeight();
         return (xCollision && yCollision);
 
     }
@@ -87,8 +87,9 @@ public abstract class GamePiece {
     }
 
     public void decreaseHP(GamePiece g){
+        System.out.print(this.hp);
         this.hp -= g.getDamage();
-        if (this.hp <= 0) onScreen = false;
+        if (this.hp <= 0) this.onScreen = false;
     }
 
     public abstract void defaultMove();
