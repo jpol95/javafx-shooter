@@ -10,10 +10,12 @@ import java.util.Set;
 
 
 public class MyPiece extends GamePiece {
-    public MyPiece(){
-        super(200, 350, 100, 100);
+    public MyPiece(Controller c){
+        super(200, 350,100, 100, c);
         this.damage = 100;
         this.hp = 100;
+        this.fitHeight = 100;
+        this.fitWidth = 100;
         Image image = new Image("file:///C:/Users/19548/Downloads/mypiece.png");
         this.imageview.setImage(image);
 
@@ -46,7 +48,12 @@ public class MyPiece extends GamePiece {
             this.goRight();
         if (directions.contains("DOWN"))
             this.goDown();
+        if (c.getKeys().contains("SPACE")){
+            this.shootBullets(true);
+            c.getKeys().remove("SPACE");
+        }
     }
+
 
     @Override
     public void defaultMove() {

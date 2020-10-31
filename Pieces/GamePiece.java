@@ -12,8 +12,9 @@ public abstract class GamePiece {
     protected int hp;
     protected int damage;
     protected ImageView imageview;
-    private int fitHeight;
-    private int fitWidth;
+    protected int fitHeight;
+    protected int fitWidth;
+    Controller c;
     public GamePiece(){}
 
     public boolean isOnScreen() {
@@ -21,12 +22,13 @@ public abstract class GamePiece {
     }
 
     private boolean onScreen;
-    public GamePiece(double xPosition, double yPosition, int fitWidth, int fitHeight){
+    public GamePiece(double xPosition, double yPosition, int fitWidth, int fitHeight, Controller c){
         this.xPosition = xPosition;
         this.yPosition = yPosition;
         this.fitWidth = fitWidth;
         this.fitHeight = fitHeight;
         this.onScreen = true;
+        this.c = c;
         configImage();
 
     }
@@ -90,6 +92,17 @@ public abstract class GamePiece {
         System.out.print(this.hp);
         this.hp -= g.getDamage();
         if (this.hp <= 0) this.onScreen = false;
+    }
+    protected void shootBullets(boolean up){
+        BulletPiece newBullet;
+        if (up) {
+            newBullet = new BulletPiece(this.getX(), this.getY() - this.getFitHeight(), true);
+        }
+        else {
+            newBullet = new BulletPiece(this.getX(), this.getY() + this.getFitHeight(), false);
+        }
+        c.getModel().getOnScreen().add(newBullet);
+        c.getRoot().getChildren().add(newBullet.getImageview());
     }
 
     public abstract void defaultMove();

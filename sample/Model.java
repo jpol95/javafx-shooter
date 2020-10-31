@@ -9,7 +9,7 @@ public class Model {
     private ArrayList<GamePiece> onScreen;
     public Model(Controller controller){
         onScreen = new ArrayList<>();
-        onScreen.add(new MyPiece());
+        onScreen.add(new MyPiece(controller));
         onScreen.add(new EnemyPiece(0, 20, controller));
     }
     public void add(GamePiece g){

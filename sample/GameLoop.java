@@ -63,12 +63,6 @@ public class GameLoop extends AnimationTimer {
 private void handleMovement(){
     MyPiece mainChar = c.getModel().getMain();
     mainChar.go(c.getKeys());
-    if (c.getKeys().contains("SPACE")){
-        BulletPiece bullet = new BulletPiece(mainChar.getX() + mainChar.getFitWidth()/2.35, mainChar.getY());
-        c.getModel().add(bullet);
-        c.getRoot().getChildren().add(bullet.getImageview());
-        c.getKeys().remove("SPACE");
-    }
 }
 
 

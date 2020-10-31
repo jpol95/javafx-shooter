@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class EnemyPiece extends GamePiece {
     private ArrayList<double[]> positions;
     private int index;
+
     Controller controller;
 
-    public EnemyPiece(double x, double y, Controller controller) {
-        super(x, y, 100, 100);
+    public EnemyPiece(double x, double y, Controller c) {
+        super(x, y, 100, 100,c);
         this.damage = 10;
         this.hp = 1;
-        this.controller = controller;
         this.imageview.setImage(new Image("file:///C:/Users/19548/Downloads/enemyship.jpg"));
         this.setPositions();
         index = 0;
@@ -25,7 +25,7 @@ public class EnemyPiece extends GamePiece {
 
     public void defaultMove() {
         this.updatePosition(positions.get(index%positions.size())[0], positions.get(index%positions.size())[1]);
-        if (index > 0 && index%50 == 0) shootBullets();
+        if (index > 0 && index%50 == 0) shootBullets(false);
         index++;
     }
 
@@ -41,9 +41,4 @@ public class EnemyPiece extends GamePiece {
 
 }
 
-private void shootBullets(){
-        BulletPiece newBullet = new BulletPiece(this.getX(), this.getY() + this.getFitHeight());
-    controller.getModel().getOnScreen().add(newBullet);
-    controller.getRoot().getChildren().add(newBullet.getImageview());
-}
 }
