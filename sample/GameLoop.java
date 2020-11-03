@@ -7,6 +7,7 @@ import javafx.animation.AnimationTimer;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,6 +25,7 @@ public class GameLoop extends AnimationTimer {
         handleDefault();
         handleMovement();
         deleteOffScreen();
+//        c.handleHealthBar();
     }
 
     @Override

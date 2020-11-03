@@ -89,7 +89,6 @@ public abstract class GamePiece {
     }
 
     public void decreaseHP(GamePiece g){
-        System.out.print(this.hp);
         this.hp -= g.getDamage();
         if (this.hp <= 0) this.onScreen = false;
     }
